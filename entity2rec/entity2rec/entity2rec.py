@@ -273,7 +273,7 @@ class Entity2Rec(Entity2Vec, Entity2Rel):
         #
         # else:
 
-        self.model.fit(x_train, y_train, qids_train)
+        self.model.fit(x_train, y_train)
 
     def predict(self, x_test, qids_test):
 
