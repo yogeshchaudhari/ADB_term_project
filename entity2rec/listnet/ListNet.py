@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys,os
+import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 import numpy as np
@@ -17,6 +17,7 @@ from sklearn.preprocessing import StandardScaler
 from utils import plot_result
 from utils import NNfuncs
 
+
 class Model(chainer.Chain):
     def __init__(self, n_in, n_units1, n_units2, n_out):
         super(Model, self).__init__(
@@ -25,14 +26,12 @@ class Model(chainer.Chain):
             l3=L.Linear(n_units2, n_out),
         )
 
-
     def __call__(self, x, t):
         h1 = self.l1(x)
         y = self.l3(F.relu(self.l2(F.relu(self.l1(x)))))
         # self.loss = self.listwise_cost(y_data, t_data)
         self.loss = self.jsd(t, y)
         return self.loss
-
 
     def predict(self, x):
         h1 = F.relu(self.l1(x))
@@ -125,6 +124,11 @@ class ListNet(NNfuncs.NN):
 
 
     def fit(self, fit_X, fit_y, batchsize=100, n_epoch=200, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        print(len(fit_X))
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        print(len(fit_X[0]))
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
 
