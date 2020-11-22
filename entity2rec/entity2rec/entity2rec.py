@@ -264,16 +264,16 @@ class Entity2Rec(Entity2Vec, Entity2Rel):
 
         # Only needed if you want to perform validation (early stopping & trimming)
 
-        if x_val is not None and y_val is not None and qids_val is not None:
+        # if x_val is not None and y_val is not None and qids_val is not None:
+        #
+        #     monitor = pyltr.models.monitors.ValidationMonitor(
+        #         x_val, y_val, qids_val, metric=fit_metric)
+        #
+        #     self.model.fit(x_train, y_train, qids_train, monitor=monitor)
+        #
+        # else:
 
-            monitor = pyltr.models.monitors.ValidationMonitor(
-                x_val, y_val, qids_val, metric=fit_metric)
-
-            self.model.fit(x_train, y_train, qids_train, monitor=monitor)
-
-        else:
-
-            self.model.fit(x_train, y_train, qids_train)
+        self.model.fit(x_train, y_train, qids_train)
 
     def predict(self, x_test, qids_test):
 

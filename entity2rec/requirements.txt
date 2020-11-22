@@ -6,3 +6,6 @@ pandas
 pyltr
 scipy
 SPARQLWrapper
+chainer
+matplotlib
+tqdm
