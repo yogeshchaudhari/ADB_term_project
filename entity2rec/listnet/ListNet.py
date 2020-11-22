@@ -1,19 +1,11 @@
-# -*- coding: utf-8 -*-
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 import numpy as np
-import six
-import pickle
-import scipy
 import chainer
 import chainer.functions as F
 import chainer.links as L
-from chainer import optimizers
-from chainer import serializers
 from tqdm import tqdm
-import scipy.stats as ss
-from sklearn.preprocessing import StandardScaler
 from utils import plot_result
 from utils import NNfuncs
 
@@ -29,7 +21,6 @@ class Model(chainer.Chain):
     def __call__(self, x, t):
         h1 = self.l1(x)
         y = self.l3(F.relu(self.l2(F.relu(self.l1(x)))))
-        # self.loss = self.listwise_cost(y_data, t_data)
         self.loss = self.jsd(t, y)
         return self.loss
 
@@ -40,14 +31,15 @@ class Model(chainer.Chain):
         return h.data
 
     def kld(self, vec_true, vec_compare):
+        # Kullback–Leibler divergence
         ind = vec_true.data * vec_compare.data > 0
         ind_var = chainer.Variable(ind)
         include_nan = vec_true * F.log(vec_true / vec_compare)
         z = chainer.Variable(np.zeros((len(ind), 1), dtype=np.float32))
-        # return np.nansum(vec_true * np.log(vec_true / vec_compare))
         return F.sum(F.where(ind_var, include_nan, z))
 
     def jsd(self, vec_true, vec_compare):
+        # Jensen–Shannon divergence
         vec_mean = 0.5 * (vec_true + vec_compare)
         return 0.5 * self.kld(vec_true, vec_mean) + 0.5 * self.kld(vec_compare, vec_mean)
 
@@ -88,12 +80,12 @@ class ListNet(NNfuncs.NN):
         print("Start training and validation loop......")
         N = len(x_train)
         N_test = len(x_test)
-        for epoch in six.moves.range(1, n_epoch + 1):
+        for epoch in range(1, n_epoch + 1):
             print('epoch', epoch)           
             # training
             perm = np.random.permutation(N)
             sum_loss = 0
-            for i in tqdm(six.moves.range(0, N, batchsize)):
+            for i in tqdm(range(0, N, batchsize)):
                 x = chainer.Variable(np.asarray(x_train[perm[i:i + batchsize]]))
                 t = chainer.Variable(np.asarray(y_train[perm[i:i + batchsize]]))
 
@@ -105,7 +97,7 @@ class ListNet(NNfuncs.NN):
 
             perm = np.random.permutation(N_test)
             sum_loss = 0
-            for j in tqdm(six.moves.range(0, N_test, batchsize)):
+            for j in tqdm(range(0, N_test, batchsize)):
                 x = chainer.Variable(np.asarray(x_test[perm[j:j + batchsize]]), volatile='off')
                 t = chainer.Variable(np.asarray(y_test[perm[j:j + batchsize]]), volatile='off')
                 loss = self.model(x, t)
@@ -123,12 +115,7 @@ class ListNet(NNfuncs.NN):
             print("NDCG@100 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
 
 
-    def fit(self, fit_X, fit_y, batchsize=100, n_epoch=200, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
-        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-        print(len(fit_X))
-        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-        print(len(fit_X[0]))
-        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    def fit(self, fit_X, fit_y, batchsize=100, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
 

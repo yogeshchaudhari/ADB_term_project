@@ -52,7 +52,7 @@ class Entity2Vec(Node2Vec):
 
         for prop_name in properties_names:
 
-            print(prop_name)
+            # print(prop_name)
 
             prop_short = prop_name
 

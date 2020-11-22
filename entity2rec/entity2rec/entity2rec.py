@@ -49,7 +49,7 @@ class Entity2Rec(Entity2Vec, Entity2Rel):
     def __init__(self, dataset, run_all=False,
                  is_directed=False, preprocessing=True, is_weighted=False,
                  p=1, q=4, walk_length=10,
-                 num_walks=500, dimensions=500, window_size=10,
+                 num_walks=50, dimensions=500, window_size=10,
                  workers=8, iterations=5, config='config/properties.json',
                  feedback_file=False, collab_only=False, content_only=False,
                  social_only=False):
@@ -261,17 +261,6 @@ class Entity2Rec(Entity2Vec, Entity2Rel):
             raise ValueError('Metric not implemented')
 
         self.model = ListNet.ListNet()
-
-        # Only needed if you want to perform validation (early stopping & trimming)
-
-        # if x_val is not None and y_val is not None and qids_val is not None:
-        #
-        #     monitor = pyltr.models.monitors.ValidationMonitor(
-        #         x_val, y_val, qids_val, metric=fit_metric)
-        #
-        #     self.model.fit(x_train, y_train, qids_train, monitor=monitor)
-        #
-        # else:
 
         self.model.fit(x_train, y_train)
 
