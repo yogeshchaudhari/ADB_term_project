@@ -90,7 +90,7 @@ class Entity2Rel(object):
 
                     wiki_id_query, qid, wiki_id_candidate, relevance, doc_id = self.parse_ceccarelli_line(line)
 
-                    print(wiki_id_query)
+                    # print(wiki_id_query)
 
                     uri_query = Sparql.get_uri_from_wiki_id(wiki_id_query)
 
