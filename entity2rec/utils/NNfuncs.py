@@ -3,18 +3,10 @@ import sys,os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 import numpy as np
-import six
-import pickle
-import scipy
 import chainer
-import chainer.functions as F
-import chainer.links as L
 from chainer import optimizers
 from chainer import serializers
 from tqdm import tqdm
-import scipy.stats as ss
-from sklearn.preprocessing import StandardScaler
-from utils import plot_result
 
 
 class NN(object):
@@ -24,7 +16,6 @@ class NN(object):
         serializers.load_hdf5(modelName, self.model)
         print('Load optimizer state')
         serializers.load_hdf5(modelName[:-5] + 'state', self.optimizer)
-
 
     def initializeModel(self, Model, train_X, n_units1, n_units2, optimizerAlgorithm):
         print("prepare initialized model!")
@@ -59,15 +50,13 @@ class NN(object):
     def predictTargets(self, x_pred, batchsize):
         N_pred = len(x_pred)
         y_pred = np.zeros(0)
-        for j in tqdm(six.moves.range(0, N_pred, batchsize)):
+        for j in tqdm(range(0, N_pred, batchsize)):
             x = chainer.Variable(np.asarray(x_pred[j:j + batchsize]), volatile='on')
             y_pred = np.append(y_pred, self.model.predict(x))
         return y_pred
 
     def predict(self, predict_X):
-        return self.model.predict(predict_X.astype(np.float32))
+        return self.model.predict(predict_X)
 
     # def predict(self, predict_X, batchsize=100):
     #     return self.predictTargets(predict_X.astype(np.float32), batchsize)
-
-

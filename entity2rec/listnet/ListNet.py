@@ -44,7 +44,7 @@ class Model(chainer.Chain):
         vec_mean = 0.5 * (vec_true + vec_compare)
         return 0.5 * self.kld(vec_true, vec_mean) + 0.5 * self.kld(vec_compare, vec_mean)
 
-    def topkprob(self, vec, k=5):
+    def topkprob(self, vec, k=1):
         vec_sort = np.sort(vec)[-1::-1]
         topk = vec_sort[:k]
         ary = np.arange(k)
@@ -63,7 +63,7 @@ class ListNet(NNfuncs.NN):
             print("load resume model!")
             self.loadModel(resumemodelName)
 
-    def ndcg(self, y_true, y_score, k=100):
+    def ndcg(self, y_true, y_score, k=10):
         y_true = y_true.ravel()
         y_score = y_score.ravel()
         y_true_sorted = sorted(y_true, reverse=True)
