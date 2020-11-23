@@ -44,7 +44,7 @@ class Model(chainer.Chain):
         vec_mean = 0.5 * (vec_true + vec_compare)
         return 0.5 * self.kld(vec_true, vec_mean) + 0.5 * self.kld(vec_compare, vec_mean)
 
-    def topkprob(self, vec, k=1):
+    def topkprob(self, vec, k=5):
         vec_sort = np.sort(vec)[-1::-1]
         topk = vec_sort[:k]
         ary = np.arange(k)
@@ -63,7 +63,7 @@ class ListNet(NNfuncs.NN):
             print("load resume model!")
             self.loadModel(resumemodelName)
 
-    def ndcg(self, y_true, y_score, k=10):
+    def ndcg(self, y_true, y_score, k=20):
         y_true = y_true.ravel()
         y_score = y_score.ravel()
         y_true_sorted = sorted(y_true, reverse=True)
@@ -113,12 +113,9 @@ class ListNet(NNfuncs.NN):
             self.train_acc.append(train_ndcg)
             self.test_acc.append(test_ndcg)
             print("epoch: {0}".format(epoch + 1))
-            print("NDCG@100 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
+            print("NDCG@20 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
 
-    def predict(self, x_test):
-        return self.model.predict(chainer.Variable(x_test))
-
-    def fit(self, fit_X, fit_y, batchsize=10, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
+    def fit(self, fit_X, fit_y, batchsize=20, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
 
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))

@@ -56,7 +56,7 @@ class NN(object):
         return y_pred
 
     def predict(self, predict_X):
-        return self.model.predict(predict_X)
+        return self.model.predict(predict_X.astype(np.float32))
 
     # def predict(self, predict_X, batchsize=100):
     #     return self.predictTargets(predict_X.astype(np.float32), batchsize)

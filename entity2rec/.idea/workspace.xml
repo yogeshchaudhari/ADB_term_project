@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c9c1d3c-84bc-4c6d-b82c-8854f8fbf969" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/listnet/ListNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/listnet/ListNet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/NNfuncs.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/NNfuncs.py" afterDir="false" />
     </list>
