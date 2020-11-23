@@ -5,6 +5,7 @@ import numpy as np
 import joblib
 from entity2vec import Entity2Vec
 from entity2rel import Entity2Rel
+from np_to_tfrecords import np_to_tfrecords
 
 import pyltr
 import sys
@@ -259,6 +260,8 @@ class Entity2Rec(Entity2Vec, Entity2Rel):
         else:
 
             raise ValueError('Metric not implemented')
+
+        np_to_tfrecords(np.array(x_train), np.array(y_train), "data/train_")
 
         self.model = ListNet.ListNet()
 

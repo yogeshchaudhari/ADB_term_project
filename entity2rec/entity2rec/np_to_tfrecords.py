@@ -29,6 +29,11 @@ def np_to_tfrecords(X, Y, file_path_prefix, verbose=True):
         If input type is not float (64 or 32) or int.
     
     """
+    print("Saving the records!")
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1")
+    print("Saving the records!")
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX2")
+    print("Saving the records!")
     def _dtype_feature(ndarray):
         """match appropriate tf.train.Feature class with dtype of ndarray. """
         assert isinstance(ndarray, np.ndarray)
