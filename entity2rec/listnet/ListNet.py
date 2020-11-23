@@ -118,7 +118,7 @@ class ListNet(NNfuncs.NN):
     def predict(self, x_test):
         return self.model.predict(chainer.Variable(x_test))
 
-    def fit(self, fit_X, fit_y, batchsize=100, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
+    def fit(self, fit_X, fit_y, batchsize=10, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
 
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
@@ -132,7 +132,7 @@ class ListNet(NNfuncs.NN):
         plot_result.loss(self.train_loss, self.test_loss)
         self.saveModels(savemodelName)
 
-    def test(self, fit_X, fit_y, batchsize=100, n_epoch=1, tv_ratio=0.95, optimizerAlgorithm="Adam"):
+    def test(self, fit_X, fit_y, batchsize=10, n_epoch=1, tv_ratio=0.95, optimizerAlgorithm="Adam"):
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
         self.trainModel(train_X, train_y, validate_X, validate_y, n_epoch, batchsize)
