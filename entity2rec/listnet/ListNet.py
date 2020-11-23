@@ -1,8 +1,6 @@
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
-import tensorflow as tf
-import tensorflow_ranking as tfr
 import numpy as np
 import chainer
 import chainer.functions as F
@@ -118,6 +116,7 @@ class ListNet(NNfuncs.NN):
 
 
     def fit(self, fit_X, fit_y, batchsize=100, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
+
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
 
