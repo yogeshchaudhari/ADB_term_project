@@ -29,11 +29,6 @@ def np_to_tfrecords(X, Y, file_path_prefix, verbose=True):
         If input type is not float (64 or 32) or int.
     
     """
-    print("Saving the records!")
-    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1")
-    print("Saving the records!")
-    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX2")
-    print("Saving the records!")
     def _dtype_feature(ndarray):
         """match appropriate tf.train.Feature class with dtype of ndarray. """
         assert isinstance(ndarray, np.ndarray)
@@ -83,28 +78,3 @@ def np_to_tfrecords(X, Y, file_path_prefix, verbose=True):
     
     if verbose:
         print ("Writing {} done!".format(result_tf_file))
-
-        
-#################################    
-##      Test and Use Cases     ##
-#################################
-
-# 1-1. Saving a dataset with input and label (supervised learning)
-xx = np.random.randn(10,5)
-yy = np.random.randn(10,1)
-np_to_tfrecords(xx, yy, 'test1', verbose=True)
-
-# 1-2. Check if the data is stored correctly
-# open the saved file and check the first entries
-for serialized_example in tf.compat.v1.io.tf_record_iterator('test1.tfrecords'):
-    example = tf.train.Example()
-    example.ParseFromString(serialized_example)
-    x_1 = np.array(example.features.feature['X'].float_list.value)
-    y_1 = np.array(example.features.feature['Y'].float_list.value)
-    break
-    
-# the numbers may be slightly different because of the floating point error.
-
-# 2. Saving a dataset with only inputs (unsupervised learning)
-xx = np.random.randn(100,100)
-np_to_tfrecords(xx, None, 'test2', verbose=True)

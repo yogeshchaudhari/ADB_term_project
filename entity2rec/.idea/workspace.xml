@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1c9c1d3c-84bc-4c6d-b82c-8854f8fbf969" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity2rec/entity2rec.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity2rec/entity2rec.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity2rec/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity2rec/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity2rec/np_to_tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity2rec/np_to_tfrecords.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
