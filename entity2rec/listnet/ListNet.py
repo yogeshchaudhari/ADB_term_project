@@ -21,8 +21,8 @@ class Model(chainer.Chain):
     def __call__(self, x, t):
         h1 = self.l1(x)
         y = self.l3(F.relu(self.l2(F.relu(self.l1(x)))))
-        #self.loss = self.jsd(t, y)
-        self.loss = self.listwise_cost(t, y)
+        self.loss = self.jsd(t, y)
+        #self.loss = self.listwise_cost(t, y)
         return self.loss
 
     def predict(self, x):
