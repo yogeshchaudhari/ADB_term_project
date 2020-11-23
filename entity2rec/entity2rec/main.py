@@ -4,6 +4,7 @@ from evaluator import Evaluator
 import time
 from parse_args import parse_args
 from node2vec_recommender import Node2VecRecommender
+from np_to_tfrecords import np_to_tfrecords
 
 random.seed(1)  # fixed seed for reproducibility
 
@@ -67,6 +68,9 @@ else:
 
 print('Finished computing features after %s seconds' % (time.time() - start_time))
 print('Starting to fit the model...')
+
+np_to_tfrecords(x_train, y_train, "data/train_")
+np_to_tfrecords(x_test, y_test, "data/test_")
 
 # fit e2rec on features
 e2rec.fit(x_train, y_train, qids_train,
