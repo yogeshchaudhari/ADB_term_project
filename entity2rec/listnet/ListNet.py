@@ -21,7 +21,8 @@ class Model(chainer.Chain):
     def __call__(self, x, t):
         h1 = self.l1(x)
         y = self.l3(F.relu(self.l2(F.relu(self.l1(x)))))
-        self.loss = self.jsd(t, y)
+        #self.loss = self.jsd(t, y)
+        self.loss = self.listwise_cost(t, y)
         return self.loss
 
     def predict(self, x):
@@ -114,6 +115,8 @@ class ListNet(NNfuncs.NN):
             print("epoch: {0}".format(epoch + 1))
             print("NDCG@100 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
 
+    def predict(self, x_test):
+        return self.model.predict(chainer.Variable(x_test))
 
     def fit(self, fit_X, fit_y, batchsize=100, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
 
