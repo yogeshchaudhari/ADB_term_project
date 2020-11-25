@@ -3,5 +3,4 @@ emb/*
 *.out
 benchmarks/*
 features/*
-results/*
 venv/*
