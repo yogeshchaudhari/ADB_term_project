@@ -33,11 +33,11 @@ class Model(chainer.Chain):
 
     def kld(self, vec_true, vec_compare):
         # Kullback–Leibler divergence
-        ind = vec_true.data * vec_compare.data > 0
-        ind_var = chainer.Variable(ind)
+        nd = vec_true.data * vec_compare.data > 0
+        nd_var = chainer.Variable(nd)
         include_nan = vec_true * F.log(vec_true / vec_compare)
-        z = chainer.Variable(np.zeros((len(ind), 1), dtype=np.float32))
-        return F.sum(F.where(ind_var, include_nan, z))
+        z = chainer.Variable(np.zeros((len(nd), 1), dtype=np.float32))
+        return F.sum(F.where(nd_var, include_nan, z))
 
     def jsd(self, vec_true, vec_compare):
         # Jensen–Shannon divergence

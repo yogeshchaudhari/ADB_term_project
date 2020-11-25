@@ -23,7 +23,7 @@ def get_real_length(l):
 np.random.seed(1)
 
 
-dataset = 'LibraryThing'
+dataset = 'Movielens1M'
 
 # different datasets use different separators
 
