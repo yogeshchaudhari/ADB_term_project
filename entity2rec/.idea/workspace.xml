@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1c9c1d3c-84bc-4c6d-b82c-8854f8fbf969" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/all.dat" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/all.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/test.dat" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/test.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/train.dat" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/train.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/val.dat" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/val.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/Movielens1M/entity2rec/num1_p1_q1_l100_d200_iter5_winsize30.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

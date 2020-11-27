@@ -22,22 +22,29 @@ def generate_feedback_edgelist(filename):
 
 def generate_cinematography(filename):
     movies_added = []
+    add_to_list = False
     with codecs.open("datasets\\Movielens1M\\graphs\\%s.edgelist" % filename, 'r', encoding='latin-1') as cine, \
             open("datasets\\Movielens1M\\graphs\\feedback.edgelist", 'r') as feed, \
             open("datasets\\Movielens1M\\graphs\\feedback_%s.edgelist" % filename, 'w') as write_file:
         for i, line in enumerate(cine):
+            add_to_list = False
             line = line.strip('\n')
             line_split = line.split(" ")
             movie = line_split[0]
             if movie not in movies_added:
-                movies_added.append(movie)
                 feed.seek(0)
                 for idx, feed_line in enumerate(feed):
                     feed_line = feed_line.strip('\n')
                     ls = feed_line.split(" ")
                     if movie == ls[1]:
+                        add_to_list = True
                         write_file.write('%s\n' % feed_line)
+            else:
+                write_file.write('%s\n' % line)
 
+            if add_to_list:
+                write_file.write('%s\n' % line)
+                movies_added.append(movie)
 
 # generate_feedback_edgelist("abcd")
 generate_cinematography("dbo_cinematography")
