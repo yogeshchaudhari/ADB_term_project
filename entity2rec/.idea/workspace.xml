@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c9c1d3c-84bc-4c6d-b82c-8854f8fbf969" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_cinematography.edgelist" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_cinematography.edgelist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_director.edgelist" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_director.edgelist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_distributor.edgelist" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_distributor.edgelist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_editing.edgelist" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_editing.edgelist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_musicComposer.edgelist" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_musicComposer.edgelist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_starring.edgelist" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_starring.edgelist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_writer.edgelist" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/Movielens1M/graphs/feedback_dbo_writer.edgelist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/create_edgelists.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/create_edgelists.py" afterDir="false" />
-    </list>
+    <list default="true" id="1c9c1d3c-84bc-4c6d-b82c-8854f8fbf969" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
