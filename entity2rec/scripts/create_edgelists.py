@@ -27,8 +27,8 @@ def generate_cinematography(filename):
             open("datasets\\Movielens1M\\graphs\\feedback_%s.edgelist" % filename, 'w', encoding="utf-8") as write_file:
         for i, line in enumerate(cine):
             add_to_list = False
-            line1 = line.strip('\n')
-            line_split = line1.split(" ")
+            line = line.strip('\n')
+            line_split = line.split(" ")
             movie = line_split[0]
             if movie not in movies_added:
                 feed.seek(0)
