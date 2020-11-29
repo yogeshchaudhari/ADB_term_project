@@ -260,9 +260,19 @@ class Entity2Rec(Entity2Vec, Entity2Rel):
 
             raise ValueError('Metric not implemented')
 
-        self.model = ListNet.ListNet()
+        # self.model = ListNet.ListNet()
 
-        self.model.fit(x_train, y_train)
+        # self.model.fit(x_train, y_train)
+        self.model = pyltr.models.LambdaMART(
+            metric=fit_metric,
+            n_estimators=n_estimators,
+            learning_rate=lr,
+            max_depth=max_depth,
+            max_features=max_features,
+            verbose=1,
+            random_state=1
+        )
+        self.model.fit(x_train, y_train, qids_train)
 
     def predict(self, x_test, qids_test):
 
