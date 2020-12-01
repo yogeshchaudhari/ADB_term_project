@@ -19,7 +19,6 @@ class Model(chainer.Chain):
         )
 
     def __call__(self, x, t):
-        h1 = self.l1(x)
         y = self.l3(F.relu(self.l2(F.relu(self.l1(x)))))
         self.loss = self.jsd(t, y)
         #self.loss = self.listwise_cost(t, y)
@@ -89,7 +88,6 @@ class ListNet(NNfuncs.NN):
             for i in tqdm(range(0, N, batchsize)):
                 x = chainer.Variable(np.asarray(x_train[perm[i:i + batchsize]]))
                 t = chainer.Variable(np.asarray(y_train[perm[i:i + batchsize]]))
-
                 self.optimizer.update(self.model, x, t)
                 sum_loss += float(self.model.loss.data) * len(t.data)
 
@@ -115,19 +113,12 @@ class ListNet(NNfuncs.NN):
             print("epoch: {0}".format(epoch + 1))
             print("NDCG@20 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
 
-    def fit(self, fit_X, fit_y, batchsize=20, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="ListNet.model"):
-
+    def fit(self, fit_X, fit_y, batchsize=10, n_epoch=10, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam"):
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
-
         if self.resumemodelName is None:
             self.initializeModel(Model, train_X, n_units1, n_units2, optimizerAlgorithm)
-        
         self.trainModel(train_X, train_y, validate_X, validate_y, n_epoch, batchsize)
-
-        plot_result.acc(self.train_acc, self.test_acc)
-        plot_result.loss(self.train_loss, self.test_loss)
-        self.saveModels(savemodelName)
 
     def test(self, fit_X, fit_y, batchsize=10, n_epoch=1, tv_ratio=0.95, optimizerAlgorithm="Adam"):
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
