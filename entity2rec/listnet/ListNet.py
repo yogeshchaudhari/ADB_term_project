@@ -113,7 +113,7 @@ class ListNet(NNfuncs.NN):
             print("epoch: {0}".format(epoch + 1))
             print("NDCG@20 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
 
-    def fit(self, fit_X, fit_y, batchsize=10, n_epoch=10, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam"):
+    def fit(self, fit_X, fit_y, batchsize=20, n_epoch=20, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam"):
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
         if self.resumemodelName is None:

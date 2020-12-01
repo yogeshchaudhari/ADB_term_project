@@ -10,14 +10,16 @@ Users with less than 10 ratings are discarded
 
 
 def generate_feedback_edgelist(filename):
-    with codecs.open("datasets\\Movielens1M\\all.dat", 'r', encoding='latin-1') as feedback_read, \
+    with codecs.open("datasets\\Movielens1M\\train.dat", 'r', encoding='latin-1') as feedback_read, \
             open("datasets\\Movielens1M\\graphs\\feedback.edgelist", 'w') as train_write:
         for i, line in enumerate(feedback_read):
             line = line.strip('\n')
             line_split = line.split(" ")
             user_id = line_split[0]
             item_name = line_split[1]
-            train_write.write('%s %s\n' % (user_id, item_name))
+            rating = int(line_split[2])
+            if rating > 3:
+                train_write.write('%s %s\n' % (user_id, item_name))
 
 
 def generate_cinematography(filename):
@@ -46,14 +48,15 @@ def generate_cinematography(filename):
                 movies_added.append(movie)
 
 
+generate_feedback_edgelist("feedback")
 generate_cinematography("dbo_cinematography")
 generate_cinematography("dbo_director")
 generate_cinematography("dbo_distributor")
-generate_cinematography("dbo_starring")
 generate_cinematography("dbo_editing")
-generate_cinematography("dbo_writer")
 generate_cinematography("dbo_musicComposer")
 generate_cinematography("dbo_producer")
+generate_cinematography("dbo_starring")
+generate_cinematography("dbo_writer")
 #
 # def sparsity(user, item, interactions):
 #     return 100 * (1 - interactions / (user * item))
